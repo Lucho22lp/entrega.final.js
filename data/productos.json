@@ -1,0 +1,124 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Café Espresso",
+      "categoria": "cafe",
+      "precio": 800,
+      "imagen": "assets/img/cafe-espresso.png",
+      "descripcion": "Shot corto, intenso y aromático."
+    },
+    {
+      "id": 2,
+      "nombre": "Espresso Doppio",
+      "categoria": "cafe",
+      "precio": 1100,
+      "imagen": "assets/img/cafe-doppio.jpeg",
+      "descripcion": "Doble espresso para extra potencia."
+    },
+    {
+      "id": 3,
+      "nombre": "Ristretto",
+      "categoria": "cafe",
+      "precio": 900,
+      "imagen": "assets/img/ristretto.png",
+      "descripcion": "Extracción corta, cuerpo súper concentrado."
+    },
+    {
+      "id": 4,
+      "nombre": "Americano",
+      "categoria": "cafe",
+      "precio": 900,
+      "imagen": "assets/img/cafe-americano.jpg",
+      "descripcion": "Espresso rebajado con agua caliente."
+    },
+    {
+      "id": 5,
+      "nombre": "Café con Leche",
+      "categoria": "cafe",
+      "precio": 1300,
+      "imagen": "assets/img/cafe-con-leche.jpg",
+      "descripcion": "Mitad café, mitad leche vaporizada."
+    },
+    {
+      "id": 6,
+      "nombre": "Capuccino",
+      "categoria": "cafe",
+      "precio": 1400,
+      "imagen": "assets/img/cafe-capuccino.jpg",
+      "descripcion": "Espresso, leche y espuma en partes equilibradas."
+    },
+    {
+      "id": 7,
+      "nombre": "Latte",
+      "categoria": "cafe",
+      "precio": 1500,
+      "imagen": "assets/img/cafe-latte.jpg",
+      "descripcion": "Espresso con mucha leche vaporizada, suave y cremoso."
+    },
+    {
+      "id": 8,
+      "nombre": "Flat White",
+      "categoria": "cafe",
+      "precio": 1600,
+      "imagen": "assets/img/cafe-flatwhite.jpg",
+      "descripcion": "Doble espresso con microespuma, sabor intenso."
+    },
+    {
+      "id": 9,
+      "nombre": "Macchiato",
+      "categoria": "cafe",
+      "precio": 1200,
+      "imagen": "assets/img/cafe-macchiato.jpg",
+      "descripcion": "Espresso apenas “manchado” con espuma de leche."
+    },
+    {
+      "id": 10,
+      "nombre": "Mocha",
+      "categoria": "cafe",
+      "precio": 1700,
+      "imagen": "assets/img/cafe-mocha.jpg",
+      "descripcion": "Espresso con chocolate y leche; goloso y balanceado."
+    },
+    {
+      "id": 101,
+      "nombre": "Torta Rogel",
+      "categoria": "pasteleria",
+      "precio": 4500,
+      "imagen": "assets/img/torta-rogel.jpg",
+      "descripcion": "Capas crocantes con dulce de leche y merengue."
+    },
+    {
+      "id": 102,
+      "nombre": "Torta de Chocolate",
+      "categoria": "pasteleria",
+      "precio": 4700,
+      "imagen": "assets/img/torta-chocolate.jpg",
+      "descripcion": "Bizcochuelo húmedo con ganache."
+    },
+    {
+      "id": 103,
+      "nombre": "Cheesecake Clásico",
+      "categoria": "pasteleria",
+      "precio": 4800,
+      "imagen": "assets/img/cheesecake.jpg",
+      "descripcion": "Cremoso, base de galletas y coulis suave."
+    },
+    {
+      "id": 104,
+      "nombre": "Medialunas de Manteca (x2)",
+      "categoria": "pasteleria",
+      "precio": 1400,
+      "imagen": "assets/img/medialunas.jpg",
+      "descripcion": "Hojaldradas, doradas y tibias."
+    },
+    {
+      "id": 105,
+      "nombre": "Tostado Jamón y Queso",
+      "categoria": "pasteleria",
+      "precio": 2300,
+      "imagen": "assets/img/tostado-jyq.jpg",
+      "descripcion": "Pan de miga, jamón cocido y queso fundido."
+    }
+  ]
+}
