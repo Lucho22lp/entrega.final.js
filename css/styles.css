@@ -1,22 +1,184 @@
-:root{--brand:#3e2723;--brand-2:#6d4c41;--accent:#ff7043}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:0;color:#222;background:#f9f9f9}
-.navbar{backdrop-filter:saturate(110%) blur(4px)}
-.navbar-brand{font-weight:700;letter-spacing:.3px}
-.nav-link{transition:color .2s ease,opacity .2s ease}
-.nav-link:hover{color:#fff;opacity:.9}
-.badge{font-size:.7rem;background:#ff7043;border-radius:999px}
-.hero{position:relative;min-height:86vh;display:grid;place-items:center;color:#fff;background:linear-gradient(180deg,rgba(62,39,35,.65),rgba(62,39,35,.65)),url("../assets/img/hero-coffee.jpg") center/cover no-repeat}
-.hero h1{font-weight:700;letter-spacing:.4px}
-.hero .lead{max-width:720px;margin-inline:auto}
-.category-card{transition:transform .2s ease,box-shadow .2s ease}
-.category-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
-.benefit{border:1px solid #e9ecef;border-radius:.75rem;padding:1.25rem;height:100%}
-footer a{color:#fff;text-decoration:none}
-footer a:hover{text-decoration:underline}
-.carrito{position:fixed;right:0;top:0;width:340px;height:100%;background:#fff;z-index:1050;border-left:1px solid #e5e5e5;box-shadow:-2px 0 8px rgba(0,0,0,.1);transform:translateX(0);transition:transform .25s ease;overflow-y:auto}
-.carrito.oculto{transform:translateX(100%)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(1px);opacity:1;transition:opacity .25s ease;z-index:1049}
-.overlay.hidden{opacity:0;pointer-events:none}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+/* =========================
+   Variables & Reset
+========================= */
+:root { --brand:#3e2723; --brand-2:#6d4c41; --accent:#ff7043; }
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 0; padding: 0;
+  color: #222; background: #f9f9f9;
+}
+
+/* =========================
+   Navbar
+========================= */
+.navbar { backdrop-filter: saturate(110%) blur(4px); }
+.navbar-brand { font-weight: 700; letter-spacing: .3px; }
+.nav-link { transition: color .2s ease, opacity .2s ease; }
+.nav-link:hover { color: #fff; opacity: .9; }
+.badge { font-size: .7rem; background: var(--accent); border-radius: 999px; }
+
+/* =========================
+   HERO
+========================= */
+header.hero {
+  position: relative;
+  min-height: 86vh;
+  display: grid; place-items: center;
+  text-align: center; color: #fff;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.55)),
+    url("../assets/img/fondo-cafe.jpeg") center / cover no-repeat;
+}
+header.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.20);
+  z-index: 0;
+}
+header.hero > * { position: relative; z-index: 1; }
+header.hero h1 { font-weight: 700; letter-spacing: .4px; margin: 0 16px; }
+header.hero .lead { max-width: 720px; margin: 8px auto 0; }
+header.hero nav a {
+  color: #fff; text-decoration: none; font-weight: 600;
+  margin: 0 10px;
+}
+
+/* =========================
+   Cards generales
+========================= */
+.category-card { transition: transform .2s ease, box-shadow .2s ease; }
+.category-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+
+.benefit {
+  border: 1px solid #e9ecef; border-radius: .75rem;
+  padding: 1.25rem; height: 100%;
+}
+
+/* =========================
+   Footer
+========================= */
+footer a { color: #fff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* =========================
+   Carrito lateral
+========================= */
+.carrito {
+  position: fixed; right: 0; top: 0; width: 340px; height: 100%;
+  background: #fff; z-index: 1050;
+  border-left: 1px solid #e5e5e5;
+  box-shadow: -2px 0 8px rgba(0,0,0,.1);
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  overflow-y: auto;
+}
+.carrito:not(.oculto) { transform: translateX(0); }
+
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35); backdrop-filter: blur(1px);
+  opacity: 1; transition: opacity .25s ease; z-index: 1049;
+}
+.overlay.hidden { opacity: 0; pointer-events: none; }
+
+/* =========================
+   Accesibilidad
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+
+.producto-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  height: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  text-align: left;
+}
+.producto-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.producto-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.producto-card p {
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+.btn-agregar {
+  background: var(--brand-2);
+  color: #fff; border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: auto; /* empuja el botón al fondo de la card */
+}
+.btn-agregar:hover { background: #4e342e; }
+
+/* =========================
+   Badge Carrito
+========================= */
+#badge-carrito {
+  background: var(--accent); color: #fff;
+  padding: 2px 8px; border-radius: 999px; font-size: 12px;
+}
+
+/* =========================
+   Botón CTA hero
+========================= */
+.btn-cta{
+  --bg: var(--accent, #ff7043);
+  --bg-hover: #e35a2a;
+  --ring: rgba(255,112,67,.35);
+
+  display:inline-flex; align-items:center; gap:10px;
+  background: var(--bg); color:#fff; text-decoration:none;
+  padding: 12px 26px; border-radius:999px;
+  font-weight:700; letter-spacing:.2px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18);
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn-cta:hover{
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+.btn-cta:active{ transform: translateY(0); }
+.btn-cta:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring), 0 10px 24px rgba(0,0,0,.22);
+}
+.btn-ico{ transition: transform .18s ease; }
+.btn-cta:hover .btn-ico{ transform: translateX(2px); }
+@media (max-width:480px){
+  .btn-cta{ padding: 11px 20px; font-weight: 700; }
+}
+.carrito .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.carrito .item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}

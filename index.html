@@ -1,101 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Saverio · Cafetería & Pastelería</title>
-<meta name="description" content="Saverio: cafetería & pastelería. Cafés de especialidad y tortas artesanales. Envíos y take away." />
-<meta name="theme-color" content="#3e2723" />
-
-
-<link rel="stylesheet" href="css/styles.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saverio - Cafetería Online</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<!-- NAVBAR -->
-<header class="sticky-top shadow-sm">
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-<div class="container">
-<a class="navbar-brand fw-bold" href="index.html">Saverio</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Abrir navegación">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarMain">
-<ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Inicio</a></li>
-<li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-<li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-<li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-<li class="nav-item ms-lg-2">
-<a class="btn btn-sm btn-outline-light position-relative" href="#" id="btn-ver-carrito" aria-label="Ver carrito">
-🛒 <span class="badge position-absolute top-0 start-100 translate-middle" id="badge-carrito">0</span>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>☕ Saverio</h1>
+      <p class="lead">Tu café favorito, ahora también online.</p>
+      <a href="productos.html" class="btn-cta" aria-label="Ver menú de cafés de Saverio">
+  <svg class="btn-ico" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M3 7h13a4 4 0 1 1 0 8H3V7zm13 0v8m-13 3h15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>Ver menú</span>
 </a>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-</header>
+    </div>
+  </header>
 
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <section style="padding:40px 20px; text-align:center;">
+      <h2>Bienvenido a Saverio</h2>
+      
+    </section>
+  </main>
 
-<!-- HERO -->
-<section class="hero text-center d-grid" style="min-height:86vh;place-items:center;color:#fff;background:linear-gradient(180deg,rgba(62,39,35,.65),rgba(62,39,35,.65)),url('assets/img/hero-coffee.jpg') center/cover no-repeat;">
-<div class="container py-5">
-<h1 class="display-4 fw-bold">Café de especialidad & Tortas artesanales</h1>
-<p class="lead mt-3 mb-4">Elegí tu café favorito y combiná con nuestras tortas hechas cada día. Envíos a todo el país.</p>
-<div class="d-flex justify-content-center gap-3">
-<a href="productos.html" class="btn btn-primary btn-lg">Ver productos</a>
-<a href="nosotros.html" class="btn btn-outline-light btn-lg">Conocé Saverio</a>
-</div>
-</div>
-</section>
+  <!-- FOOTER -->
+  <footer style="background:#3e2723; color:#fff; text-align:center; padding:20px;">
+    <p>© 2025 Saverio - Cafetería Online</p>
+  </footer>
 
-
-<!-- CATEGORÍAS -->
-<section class="py-5 bg-light">
-<div class="container">
-<div class="text-center mb-4">
-<h2 class="fw-bold">Elegí por categoría</h2>
-<p class="text-muted">Atajos para ir directo a lo que buscás</p>
-</div>
-<div class="row g-4">
-<div class="col-12 col-md-6">
-<a href="productos.html#cat-cafe" class="text-decoration-none text-dark">
-<div class="card category-card h-100 border-0 shadow-sm">
-<img src="assets/img/categoria-cafe.jpg" class="card-img-top" alt="Cafés" />
-<div class="card-body">
-<h5 class="card-title">Cafés</h5>
-<p class="card-text">Espresso, cortado y café con leche. Sabor que despierta.</p>
-</div>
-</div>
-</a>
-</div>
-<div class="col-12 col-md-6">
-<a href="productos.html#cat-tortas" class="text-decoration-none text-dark">
-<div class="card category-card h-100 border-0 shadow-sm">
-<img src="assets/img/categoria-tortas.jpg" class="card-img-top" alt="Tortas" />
-<div class="card-body">
-<h5 class="card-title">Tortas</h5>
-<p class="card-text">Clásicos como Rogel y Chocolate, siempre frescos.</p>
-</div>
-</div>
-</a>
-</div>
-</div>
-</div>
-</section>
-
-
-<!-- DESTACADOS -->
-<section class="py-5">
-<div class="container">
-<div class="d-flex justify-content-between align-items-center mb-3">
-<h2 class="h4 m-0">Destacados de la semana</h2>
-<a href="productos.html" class="btn btn-sm btn-outline-secondary">Ver todos</a>
-</div>
-<div class="row g-4">
-<!-- Placeholder de 4 destacados -->
+  <!-- Scripts del carrito y lógica -->
+  <script src="js/app.js"></script>
+</body>
 </html>

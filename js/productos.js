@@ -1,123 +1,119 @@
-/* Saverio · Productos (versión encapsulada, sin colisiones globales) */
-(function () {
-  // ---- Helper local (no contamina global) ----
-  const money = (n) =>
-    new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      maximumFractionDigits: 0,
-    }).format(Number(n) || 0);
+(() => {
+  // DOM
+  const $lista = document.getElementById("productos-container");
+  const $buscador = document.getElementById("buscador");
+  const $filtro = document.getElementById("filtro-categoria");
+  const $orden = document.getElementById("orden");
+  const $limpiar = document.getElementById("btn-limpiar");
 
-  // ---- DOM refs SOLO de productos ----
-  const cont = document.querySelector("#productos-container");
-  const buscador = document.querySelector("#buscador");
-  const filtroCat = document.querySelector("#filtro-categoria");
-  const ordenSel = document.querySelector("#orden");
-  const btnLimpiar = document.querySelector("#btn-limpiar");
+  // Estado
+  let productos = [];
+  let vista = [];
+  let iniciado = false;
 
-  // ---- Estado ----
-  let base = [];
+  // Crear card Bootstrap
+  function crearCard(p) {
+    const col = document.createElement("div");
+    col.className = "col-5 col-sm-3 col-lg-3";
 
-  // ---- Render productos ----
-  function renderProductos(lista) {
-    if (!cont) return;
-    cont.innerHTML = "";
+    col.innerHTML = `
+      <div class="producto-card h-100">
+        <img src="${p.imagen}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion}</p>
+        <p><strong>$${p.precio}</strong></p>
+        <button class="btn-agregar btn btn-sm" data-id="${p.id}">
+          Agregar al carrito
+        </button>
+      </div>
+    `;
 
-    if (!Array.isArray(lista) || !lista.length) {
-      cont.innerHTML =
-        '<div class="col-12 text-center text-muted py-5">No encontramos productos con esos filtros.</div>';
-      return;
-    }
+    return col;
+  }
 
+  // Renderiza la lista de productos
+  function render(lista) {
+    $lista.innerHTML = "";
     const frag = document.createDocumentFragment();
-    lista.forEach((p) => {
-      const col = document.createElement("div");
-      col.className = "col-12 col-sm-6 col-lg-4";
-      col.innerHTML = `
-        <div class="producto-card h-100">
-          <img src="${p.imagen || "assets/img/placeholder.jpg"}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion || ""}</p>
-          <p><strong>${money(p.precio)}</strong></p>
-          <button class="btn-agregar" data-id="${p.id}">Agregar al carrito</button>
-        </div>`;
-      const img = col.querySelector("img");
-      if (img) img.onerror = () => (img.src = "assets/img/placeholder.jpg");
-      frag.appendChild(col);
-    });
-    cont.appendChild(frag);
+    lista.forEach(p => frag.appendChild(crearCard(p)));
+    $lista.appendChild(frag);
   }
 
-  // ---- Filtros + orden ----
-  function aplicarFiltros() {
-    const q = (buscador?.value || "").toLowerCase().trim();
-    const cat = filtroCat?.value || "";
-    const ord = ordenSel?.value || "relevancia";
-
-    let lista = base.filter((p) => {
-      const txt = (p.nombre + " " + (p.descripcion || "")).toLowerCase();
-      const okTxt = !q || txt.includes(q);
-      const okCat = !cat || p.categoria === cat;
-      return okTxt && okCat;
-    });
-
-    switch (ord) {
-      case "precio-asc":  lista.sort((a, b) => a.precio - b.precio); break;
-      case "precio-desc": lista.sort((a, b) => b.precio - a.precio); break;
-      case "nombre-az":   lista.sort((a, b) => a.nombre.localeCompare(b.nombre)); break;
+  // Ordena productos
+  function ordenar(lista, modo) {
+    const out = [...lista];
+    switch (modo) {
+      case "precio-asc":
+        out.sort((a, b) => a.precio - b.precio); break;
+      case "precio-desc":
+        out.sort((a, b) => b.precio - a.precio); break;
+      case "nombre-az":
+        out.sort((a, b) => a.nombre.localeCompare(b.nombre)); break;
+      default: /* relevancia */ break;
     }
-
-    renderProductos(lista);
+    return out;
   }
 
-  // ---- Eventos UI ----
-  buscador?.addEventListener("input", aplicarFiltros);
-  filtroCat?.addEventListener("change", aplicarFiltros);
-  ordenSel?.addEventListener("change", aplicarFiltros);
-  btnLimpiar?.addEventListener("click", () => {
-    if (buscador) buscador.value = "";
-    if (filtroCat) filtroCat.value = "";
-    if (ordenSel) ordenSel.value = "relevancia";
-    aplicarFiltros();
-  });
+  // Aplica filtros + búsqueda + orden
+  function aplicarFiltros() {
+    const q = ($buscador?.value || "").trim().toLowerCase();
+    const cat = $filtro?.value || "";
 
-  // Click en “Agregar al carrito”
-  cont?.addEventListener("click", (e) => {
-    const btn = e.target.closest(".btn-agregar");
-    if (!btn) return;
-    const id = Number(btn.dataset.id);
-    const p = base.find((x) => x.id === id);
-    if (p) window.Saverio?.cart?.add(p); // usa la API global de app.js
-  });
-
-  // ---- Prefiltro por hash ----
-  function aplicarHash() {
-    const h = (location.hash || "").toLowerCase();
-    if (!filtroCat) return;
-    if (h === "#cat-cafe") filtroCat.value = "cafe";
-    if (h === "#cat-pasteleria") filtroCat.value = "pasteleria";
-  }
-  window.addEventListener("hashchange", () => { aplicarHash(); aplicarFiltros(); });
-
-  // ---- Carga JSON ----
-  fetch("data/productos.json")
-    .then((r) => {
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return r.json();
-    })
-    .then((d) => {
-      const lista = Array.isArray(d) ? d : d.productos;
-      base = (lista || []).map((p) => ({ ...p, id: +p.id, precio: +p.precio }));
-      aplicarHash();
-      aplicarFiltros();
-    })
-    .catch((err) => {
-      console.error("Error cargando productos:", err);
-      // Fallback visual si falla el fetch
-      base = [
-        { id: 1, nombre: "Café Espresso", categoria: "cafe", precio: 800, imagen: "assets/img/placeholder.jpg", descripcion: "Demo" },
-        { id: 101, nombre: "Torta Rogel", categoria: "pasteleria", precio: 4500, imagen: "assets/img/placeholder.jpg", descripcion: "Demo" },
-      ];
-      aplicarFiltros();
+    vista = productos.filter(p => {
+      const okCat = cat ? p.categoria === cat : true;
+      const okTexto =
+        p.nombre.toLowerCase().includes(q) ||
+        p.descripcion.toLowerCase().includes(q);
+      return okCat && okTexto;
     });
+
+    vista = ordenar(vista, $orden?.value || "relevancia");
+    render(vista);
+  }
+
+  // Carga JSON
+  async function cargarProductos() {
+    try {
+      const resp = await fetch("data/productos.json");
+      const data = await resp.json();
+      productos = Array.isArray(data.productos) ? data.productos : [];
+      vista = [...productos];
+    } catch (err) {
+      console.error("Error al cargar productos.json:", err);
+    }
+  }
+
+// Delegación para "Agregar al carrito"
+$lista.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-agregar");
+  if (!btn) return;
+  const id = Number(btn.dataset.id);
+  const prod = productos.find(p => p.id === id);
+
+  if (prod && window.Saverio?.cart?.add) {
+    window.Saverio.cart.add(prod);   // ahora llama al carrito real
+  } else {
+    console.warn("No se pudo agregar al carrito", prod);
+  }
+});
+
+  // Eventos de controles
+  $buscador?.addEventListener("input", aplicarFiltros);
+  $filtro?.addEventListener("change", aplicarFiltros);
+  $orden?.addEventListener("change", aplicarFiltros);
+  $limpiar?.addEventListener("click", () => {
+    if ($buscador) $buscador.value = "";
+    if ($filtro) $filtro.value = "";
+    if ($orden) $orden.value = "relevancia";
+    vista = [...productos];
+    render(vista);
+  });
+
+  // Init
+  (async function init() {
+    if (iniciado) return;
+    iniciado = true;
+    await cargarProductos();
+    render(vista);
+  })();
 })();
